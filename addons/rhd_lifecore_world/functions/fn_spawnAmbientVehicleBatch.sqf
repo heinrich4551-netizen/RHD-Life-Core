@@ -11,12 +11,11 @@ private _created = 0;
 for "_i" from 1 to _count do {
     private _loc = selectRandom _locations;
     private _locPos = _loc select 2;
-    private _road = nearestRoad _locPos;
-    private _pos = if (isNull _road) then {[_locPos,20,120] call RHD_fnc_safeSpawnPos} else {getPosATL _road};
+    private _pos = [_locPos,40,160] call RHD_fnc_safeSpawnPos;
     if (_pos isNotEqualTo []) then {
         private _veh = createVehicle [selectRandom _classes,_pos,[],0,"NONE"];
         if (!isNull _veh) then {
-            _veh setDir (if (isNull _road) then {random 360} else {getDir _road});
+            _veh setDir (random 360);
             _veh setFuel (0.35 + random 0.65);
             _veh setVariable ["RHD_LifeCore_AmbientVehicle",true,true];
             if (_cfg getOrDefault ["dynamicSimulation",true]) then {_veh enableDynamicSimulation true;};
