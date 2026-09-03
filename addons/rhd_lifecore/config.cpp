@@ -23,6 +23,7 @@ class CfgFunctions
             class applyModuleConfig {};
             class initPlayer { postInit = 1; };
             class serverInit { postInit = 1; };
+            class setupInteractions {};
             class openMenu {};
             class openProfile {};
             class setIdentity {};
@@ -407,7 +408,7 @@ class RHD_ProfileDialog
     idd = 8840;
     movingEnable = 0;
     enableSimulation = 1;
-    onLoad = "uiNamespace setVariable ['RHD_ProfileDialog',_this select 0]; [] call RHD_fnc_profileGet;";
+    onLoad = "uiNamespace setVariable ['RHD_ProfileDialog',_this select 0];";
     class controlsBackground
     {
         class Background: RscText
