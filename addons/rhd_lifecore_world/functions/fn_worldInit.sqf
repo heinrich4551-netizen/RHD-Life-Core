@@ -6,7 +6,6 @@ if !(_cfg getOrDefault ["enabled",true]) exitWith {false};
 
 if (_cfg getOrDefault ["dynamicSimulation",true]) then {
     enableDynamicSimulationSystem true;
-    setDynamicSimulationDistance ((_cfg getOrDefault ["dynamicSimulationDistance",1500]) max 100);
 };
 
 private _started = missionNamespace getVariable ["RHD_LifeCore_WorldStarted",false];
