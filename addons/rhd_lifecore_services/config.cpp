@@ -128,6 +128,9 @@ class RHD_ImpoundDialog
     class controls{class List:RscListBox{idc=8901;x=.18;y=.18;w=.58;h=.52;};class Release:RscButton{x=.18;y=.74;w=.17;h=.05;text="Release";action="[lbCurSel 8901] call RHD_fnc_impoundRelease;";};class Close:RscButton{x=.59;y=.82;w=.17;h=.05;text="Close";action="closeDialog 0";};};
 };
 
+class RHD_Module_RP;
+class AttributesBase;
+
 class CfgVehicles
 {
     class RHD_Module_RP_Services: RHD_Module_RP
