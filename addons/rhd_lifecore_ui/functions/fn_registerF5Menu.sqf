@@ -6,6 +6,14 @@ waitUntil {
 };
 if (isNull findDisplay 46) exitWith {false};
 
+waitUntil {
+    uiSleep 0.25;
+    !(isNil {missionNamespace getVariable "RHD_LifeCore_Config"}) || {time > 30}
+};
+
+private _config = missionNamespace getVariable ["RHD_LifeCore_Config", createHashMap];
+if !(_config getOrDefault ["f5MenuEnabled", true]) exitWith {false};
+
 if (missionNamespace getVariable ["RHD_LifeCore_F5EH", -1] >= 0) exitWith {true};
 
 private _eh = (findDisplay 46) displayAddEventHandler ["KeyDown", {
