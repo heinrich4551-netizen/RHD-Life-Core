@@ -36,7 +36,6 @@ class CfgFunctions
             class jobProgress {};
             class paycheck {};
             class systemInit { postInit = 1; };
-            class civilianManager { postInit = 1; };
         };
     };
 };
@@ -59,6 +58,5 @@ class CfgRemoteExec
         class RHD_fnc_phoneSend {allowedTargets = 2;};
         class RHD_fnc_emergencyCall {allowedTargets = 2;};
         class RHD_fnc_paycheck {allowedTargets = 2;};
-        class RHD_fnc_civilianManager {allowedTargets = 2;};
     };
 };
