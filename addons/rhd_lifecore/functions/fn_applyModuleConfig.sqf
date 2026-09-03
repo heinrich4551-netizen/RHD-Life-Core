@@ -11,9 +11,9 @@ _config set ["startingBank", (_logic getVariable ["RHD_StartingBank", 1000]) max
 _config set ["defaultJob", _logic getVariable ["RHD_DefaultJob", "unemployed"]];
 _config set ["jobs", _logic getVariable ["RHD_Jobs", "civilian:Citizen:0,police:Police:250,ems:EMS:250,driver:Driver:175"]];
 _config set ["licenses", _logic getVariable ["RHD_Licenses", "driving:Driving:250,weapon:Weapons:1500,commercial:Commercial:750"]];
-_config set ["shopCatalog", _logic getVariable ["RHD_ShopCatalog", "apple:Apple:10:4,corn:Corn:8:3,grapes:Grapes:12:5,peaches:Peach:12:5,iron:Iron:35:15,copper:Copper:45:20,gold:Gold:150:75,diamond:Diamond:500:250,oil_sand:Oil Sand:25:10"]];
-_config set ["atmClasses", _logic getVariable ["RHD_ATMClasses", "Land_Atm_01_F,Land_Atm_02_F,Land_Atm_01_malden_F,Land_Atm_02_malden_F"]];
-_config set ["shopClasses", _logic getVariable ["RHD_ShopClasses", "Land_Shed_Small_F,Land_Kiosk_redburger_F"]];
+_config set ["shopCatalog", _logic getVariable ["RHD_ShopCatalog", "apple:Apple:10:4,cannabis:Cannabis:50:20,corn:Corn:8:3,grapes:Grapes:12:5,peaches:Peach:12:5,iron:Iron:35:15,copper:Copper:45:20,gold:Gold:150:75,diamond:Diamond:500:250,oil_sand:Oil Sand:25:10"]];
+_config set ["atmClasses", _logic getVariable ["RHD_ATMClasses", "Land_Atm_01_F,Land_Atm_02_F"]];
+_config set ["shopClasses", _logic getVariable ["RHD_ShopClasses", "Land_CashDesk_F"]];
 _config set ["vehicleCatalog", _logic getVariable ["RHD_VehicleCatalog", "C_Offroad_01_F:Offroad:15000,C_Hatchback_01_F:Hatchback:18000,C_SUV_01_F:SUV:30000"]];
 _config set ["bankingEnabled", _logic getVariable ["RHD_EnableBanking", true]];
 _config set ["shopsEnabled", _logic getVariable ["RHD_EnableShops", true]];
