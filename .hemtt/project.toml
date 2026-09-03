@@ -1,0 +1,24 @@
+name = "RHD - LifeCore"
+prefix = "rhd_lifecore"
+mainprefix = "x"
+
+[version]
+major = 0
+minor = 1
+patch = 0
+build = 0
+
+[properties]
+author = "LT. Toad"
+url = "https://github.com/heinrich4551-netizen/RHD-Life-Core"
+
+[files]
+include = [
+    "mod.cpp",
+    "README.md",
+    "LICENSE",
+]
+exclude = [
+    "*.psd",
+    "*.xcf",
+]
