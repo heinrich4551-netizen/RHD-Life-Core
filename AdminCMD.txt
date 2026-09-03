@@ -1,0 +1,216 @@
+RHD - LifeCore | ADMIN COMMAND REFERENCE
+Author: LT. Toad
+
+PREFIXES
+!rhd  - Primary RHD LifeCore administrator prefix
+!a3a  - Antistasi Ultimate compatibility alias
+
+ADMIN AUTHORIZATION
+All privileged commands are Steam64 UID gated on the server.
+Configure authorized administrators with the mission's RHD_ADMIN_UIDS list.
+Player names are only used to locate targets; they are NOT used to grant admin access.
+
+GENERAL / HELP
+!rhd help
+    Displays the command categories and syntax.
+
+!rhd serverstatus
+    Shows player count, server FPS, RHD module readiness, Antistasi status and time.
+
+!rhd players
+    Lists online players, jobs and Steam64 UIDs.
+
+!rhd player <player|UID>
+    Displays detailed RHD information for one player.
+
+!rhd save
+    Saves all loaded RHD player profiles.
+
+!rhd saveplayer <player|UID>
+    Saves one player's RHD profile.
+
+WORLD / SERVER CONTROL
+!rhd time <hour.decimal>
+    Sets world time. Example: !rhd time 18.5
+
+!rhd weather <0..1>
+    Sets overcast, rain and fog together.
+
+!rhd overcast <0..1>
+    Sets overcast.
+
+!rhd rain <0..1>
+    Sets rain.
+
+!rhd fog <0..1>
+    Sets fog.
+
+!rhd viewdistance <meters>
+    Sets server/client view distance within the command's safety limits.
+
+!rhd announce <message>
+    Sends a server-wide RHD announcement.
+
+RHD LIFECORE STATUS / SYSTEM CONTROL
+!rhd rhdstatus
+    Displays RHD version, module state and system enable flags.
+
+!rhd config
+    Displays loaded RHD configuration summary.
+
+!rhd toggle <system> <on|off>
+    Toggles an RHD system at runtime.
+    Supported systems:
+      economy
+      jobs
+      industry
+      rp
+      persistence
+      ambient
+      branding
+      tablet
+      conflict
+    Example: !rhd toggle economy off
+
+!rhd civilians
+    Displays managed civilian count, target population and active player scaling.
+
+!rhd conflict
+    Displays the current RHD conflict/district system state.
+
+PLAYER ADMINISTRATION
+!rhd tp <player|UID>
+    Teleports the administrator to a player.
+
+!rhd bring <player|UID>
+    Teleports a player to the administrator.
+
+!rhd heal <player|UID>
+    Restores a player's health/state.
+
+!rhd revive <player|UID>
+    Revives/restores a player through the RHD recovery path.
+
+!rhd kill <player|UID>
+    Kills the target player.
+
+!rhd freeze <player|UID>
+    Freezes/unfreezes the target player.
+
+!rhd jail <player|UID>
+    Places the target into the RHD jail state.
+
+!rhd unjail <player|UID>
+    Removes the target from the RHD jail state.
+
+!rhd eject <player|UID>
+    Ejects the target from their current vehicle.
+
+!rhd move <player|UID> <x> <y> [z]
+    Moves a player to exact world coordinates.
+    Example: !rhd move PlayerName 14500 16750 0
+
+!rhd spectate <player|UID>
+    Starts admin spectating of the target player.
+
+!rhd setcash <player|UID> <amount>
+    Sets the player's RHD cash balance.
+
+!rhd setbank <player|UID> <amount>
+    Sets the player's RHD bank balance.
+
+!rhd giveitem <player|UID> <item> <qty>
+    Gives an RHD inventory item.
+
+!rhd removeitem <player|UID> <item> <qty>
+    Removes an RHD inventory item.
+
+!rhd clearinv <player|UID>
+    Clears the player's RHD inventory.
+
+!rhd addlicense <player|UID> <license>
+    Adds an RHD license to the player.
+
+!rhd removelicense <player|UID> <license>
+    Removes an RHD license from the player.
+
+!rhd setjob <player|UID> <job>
+    Sets the player's RHD job.
+
+!rhd duty <player|UID> <on|off>
+    Sets the player's working/on-duty state.
+
+VEHICLE ADMINISTRATION
+!rhd spawn <vehicleClass>
+    Spawns a vehicle for the administrator.
+    Uses the RHD Antistasi vehicle bridge when Antistasi is ready; otherwise uses Arma creation.
+
+!rhd repair <player|UID>
+    Fully repairs the player's current vehicle.
+
+!rhd refuel <player|UID>
+    Fully refuels the player's current vehicle.
+
+!rhd deleteveh <player|UID>
+    Deletes the vehicle currently occupied by the target.
+
+ANTISTASI ULTIMATE
+!rhd status
+    Antistasi Ultimate status shortcut.
+
+!rhd a3astatus
+    Detailed Antistasi Ultimate readiness/version/status information.
+
+!rhd aggression <amount> [minutes]
+    Adds Antistasi aggression using the RHD Antistasi bridge.
+    Example: !rhd aggression 10 15
+
+!rhd resources <amount> <occupants|invaders> <attack|defence|legacy>
+    Adds Antistasi resources to the selected faction/pool.
+    Example: !rhd resources 25 occupants attack
+
+!rhd hq
+    Teleports the administrator to Antistasi HQ/Petros.
+
+!rhd a3ateleport <player|UID>
+    Antistasi administrator teleport helper.
+
+!rhd a3ahealall
+    Restores all eligible online players using the RHD admin path.
+
+!rhd a3aannounce <message>
+    Antistasi-prefixed server announcement alias.
+
+EXAMPLES
+!rhd help
+!rhd serverstatus
+!rhd players
+!rhd player 76561198012345678
+!rhd tp PlayerName
+!rhd bring PlayerName
+!rhd heal PlayerName
+!rhd revive PlayerName
+!rhd freeze PlayerName
+!rhd setcash PlayerName 10000
+!rhd setbank PlayerName 50000
+!rhd giveitem PlayerName apple 25
+!rhd addlicense PlayerName driving
+!rhd setjob PlayerName police
+!rhd duty PlayerName on
+!rhd spawn C_Offroad_01_F
+!rhd repair PlayerName
+!rhd refuel PlayerName
+!rhd time 18.5
+!rhd weather 0.25
+!rhd announce Server restart in 15 minutes.
+!rhd a3astatus
+!rhd aggression 10 15
+!rhd resources 25 occupants attack
+!rhd hq
+
+NOTES
+- Commands are intended for authorized server administrators only.
+- The server validates the command sender before executing privileged operations.
+- Target matching accepts player name, Steam64 UID, or 'me' where supported by the dispatcher.
+- Antistasi commands are compatibility wrappers and should not be used to replace Antistasi's core campaign systems.
+- RHD does not grant permissions based on chat text alone.
