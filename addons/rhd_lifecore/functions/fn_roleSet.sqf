@@ -1,0 +1,21 @@
+if (!isServer) exitWith {false};
+params [["_role", "civilian", [""]]];
+private _owner = remoteExecutedOwner;
+private _player = allPlayers select {owner _x == _owner} param [0, objNull];
+if (isNull _player) exitWith {false};
+private _role = toLower _role;
+if !(_role in ["civilian","police","ems"]) exitWith {false};
+private _job = toLower (_player getVariable ["RHD_RP_Job", "unemployed"]);
+if (_role == "police" && {_job != "police"}) exitWith {false};
+if (_role == "ems" && {_job != "ems"}) exitWith {false};
+
+private _uid = getPlayerUID _player;
+private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
+private _profile = _profiles getOrDefault [_uid, createHashMap];
+if (count _profile == 0) exitWith {false};
+_profile set ["role", _role];
+_profiles set [_uid, _profile];
+missionNamespace setVariable ["RHD_LifeCore_ServerProfiles", _profiles];
+_player setVariable ["RHD_RP_Role", _role, true];
+[_player] call RHD_fnc_serverSaveProfile;
+true
