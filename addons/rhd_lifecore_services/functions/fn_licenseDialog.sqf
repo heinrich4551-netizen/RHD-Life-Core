@@ -1,4 +1,0 @@
-params [['_index',-1,[0]]];
-if (!hasInterface) exitWith {false};
-if (_index >= 0) then {private _d=uiNamespace getVariable ['RHD_LicenseDialog',displayNull]; private _id=_d displayCtrl 8881 lbData _index; [_id] remoteExecCall ['RHD_fnc_licenseBuy',2]; exitWith {true};};
-createDialog 'RHD_LicenseDialog'; private _d=uiNamespace getVariable ['RHD_LicenseDialog',displayNull]; if (isNull _d) exitWith {false}; private _list=_d displayCtrl 8881; lbClear _list; private _cfg=missionNamespace getVariable ['RHD_LifeCore_Config',createHashMap]; { _x params ['_id','_display','_price']; private _i=_list lbAdd format ['%1  |  $%2',_display,_price]; _list lbSetData [_i,_id]; } forEach ([_cfg getOrDefault ['licenses','']] call RHD_fnc_parseList); true

@@ -1,1 +1,0 @@
-params [['_index',-1,[0]]]; private _v=player getVariable ['RHD_RP_Vehicles',[]]; private _entry=_v param [_index,[]]; if (count _entry < 2) exitWith {false}; [_entry select 1] remoteExecCall ['RHD_fnc_garageRetrieveServer',2]; true

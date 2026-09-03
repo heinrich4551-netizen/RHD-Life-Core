@@ -2,47 +2,22 @@ if (!isServer) exitWith {false};
 params [["_player", objNull, [objNull]]];
 if (isNull _player || {!isPlayer _player}) exitWith {false};
 if (remoteExecutedOwner > 0 && {owner _player != remoteExecutedOwner}) exitWith {false};
-
+private _cfg = missionNamespace getVariable ["RHD_LifeCore_Config", createHashMap];
+if ((_cfg getOrDefault ["storageAdapter", "profilenamespace"]) isEqualTo "extdb3" && {missionNamespace getVariable ["RHD_LifeCore_EXTDB_Enabled", false]}) exitWith {[_player] call RHD_fnc_extdbLoadProfile};
 private _uid = getPlayerUID _player;
 if (_uid isEqualTo "") exitWith {false};
-private _cfg = missionNamespace getVariable ["RHD_LifeCore_Config", createHashMap];
 private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
 private _data = [_uid] call RHD_fnc_profileGet;
-
-if !(_data isEqualType [] && {count _data >= 8}) then {
-    _data = [
-        _cfg getOrDefault ["startingCash", 500],
-        _cfg getOrDefault ["startingBank", 1000],
-        profileName,
-        _cfg getOrDefault ["defaultJob", "unemployed"],
-        [],
-        [],
-        "civilian",
-        []
-    ];
-};
-
-private _profile = createHashMapFromArray [
-    ["cash", (_data select 0) max 0],
-    ["bank", (_data select 1) max 0],
-    ["name", _data select 2],
-    ["job", _data select 3],
-    ["licenses", _data select 4],
-    ["vehicles", _data select 5],
-    ["role", _data select 6],
-    ["inventory", _data select 7]
-];
-_profiles set [_uid, _profile];
-missionNamespace setVariable ["RHD_LifeCore_ServerProfiles", _profiles];
-
-_player setVariable ["RHD_RP_UID", _uid, true];
-_player setVariable ["RHD_RP_Name", _profile getOrDefault ["name", profileName], true];
-_player setVariable ["RHD_RP_Cash", _profile getOrDefault ["cash", 0], true];
-_player setVariable ["RHD_RP_Bank", _profile getOrDefault ["bank", 0], true];
-_player setVariable ["RHD_RP_Job", _profile getOrDefault ["job", "unemployed"], true];
-_player setVariable ["RHD_RP_Licenses", _profile getOrDefault ["licenses", []], true];
-_player setVariable ["RHD_RP_Vehicles", _profile getOrDefault ["vehicles", []], true];
-_player setVariable ["RHD_RP_Role", _profile getOrDefault ["role", "civilian"], true];
-_player setVariable ["RHD_RP_Inventory", _profile getOrDefault ["inventory", []], true];
-_player setVariable ["RHD_RP_Initialized", true, true];
-true
+if !(_data isEqualType [] && {count _data >= 8}) then {_data=[_cfg getOrDefault ["startingCash",500],_cfg getOrDefault ["startingBank",1000],profileName,_cfg getOrDefault ["defaultJob","unemployed"],[],[],"civilian",[]]};
+private _profile=createHashMapFromArray [["cash",(_data select 0) max 0],["bank",(_data select 1) max 0],["name",_data select 2],["job",_data select 3],["licenses",_data select 4],["vehicles",_data select 5],["role",_data select 6],["inventory",_data select 7]];
+_profiles set [_uid,_profile]; missionNamespace setVariable ["RHD_LifeCore_ServerProfiles",_profiles];
+_player setVariable ["RHD_RP_UID",_uid,true];
+_player setVariable ["RHD_RP_Name",_profile getOrDefault ["name",profileName],true];
+_player setVariable ["RHD_RP_Cash",_profile getOrDefault ["cash",0],true];
+_player setVariable ["RHD_RP_Bank",_profile getOrDefault ["bank",0],true];
+_player setVariable ["RHD_RP_Job",_profile getOrDefault ["job","unemployed"],true];
+_player setVariable ["RHD_RP_Licenses",_profile getOrDefault ["licenses",[]],true];
+_player setVariable ["RHD_RP_Vehicles",_profile getOrDefault ["vehicles",[]],true];
+_player setVariable ["RHD_RP_Role",_profile getOrDefault ["role","civilian"],true];
+_player setVariable ["RHD_RP_Inventory",_profile getOrDefault ["inventory",[]],true];
+_player setVariable ["RHD_RP_Initialized",true,true]; true
