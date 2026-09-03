@@ -1,0 +1,12 @@
+name = "RHD - LifeCore";
+author = "LT. Toad";
+description = "Drop-in Arma 3 roleplay framework powered by a 3DEN module.";
+actionName = "GitHub";
+action = "https://github.com/heinrich4551-netizen/RHD-Life-Core";
+logo = "";
+logoOver = "";
+logoSmall = "";
+logoTitle = "";
+tooltip = "RHD - LifeCore";
+tooltipOwned = "RHD - LifeCore";
+overview = "Place one RHD LifeCore - RP Framework module in 3DEN to add reusable RP identity and economy services to a mission.";
