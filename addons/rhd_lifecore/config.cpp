@@ -18,7 +18,7 @@ class CfgFunctions
     {
         class LifeCore
         {
-            file = "\\rhd_lifecore\\functions";
+            file = "\\x\\rhd_lifecore\\addons\\rhd_lifecore\\functions";
             class moduleRP {};
             class initPlayer { postInit = 1; };
             class openMenu {};
@@ -115,36 +115,5 @@ class CfgFactionClasses
         displayName = "RHD - LifeCore";
         priority = 5;
         side = 7;
-    };
-};
-
-class Cfg3DEN
-{
-    class Mission
-    {
-        class Scenario
-        {
-            class AttributeCategories
-            {
-                class RHD_LifeCoreInfo
-                {
-                    displayName = "RHD - LifeCore";
-                    collapsed = 1;
-                    class Attributes
-                    {
-                        class RHD_Info
-                        {
-                            displayName = "Framework";
-                            tooltip = "Place the RHD LifeCore - RP Framework module in the mission to enable RP services.";
-                            typeName = "STRING";
-                            control = "Edit";
-                            defaultValue = "'Place the RHD LifeCore - RP Framework module'";
-                            expression = "";
-                            condition = "1";
-                        };
-                    };
-                };
-            };
-        };
     };
 };
