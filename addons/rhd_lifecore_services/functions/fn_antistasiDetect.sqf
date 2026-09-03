@@ -1,0 +1,1 @@
+if (!isServer) exitWith {false}; private _detected=(missionName find 'Antistasi') >= 0 || {!isNil 'A3A_fnc_initServer'}; missionNamespace setVariable ['RHD_LifeCore_AntistasiDetected',_detected,true]; if (_detected) then {[] spawn {uiSleep 0.1; [] call RHD_fnc_antistasiAdapter;};}; _detected
