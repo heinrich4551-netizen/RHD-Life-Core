@@ -36,7 +36,7 @@ class RHD_F5MenuDialog
     idd = 8910;
     movingEnable = 0;
     enableSimulation = 1;
-    onLoad = "uiNamespace setVariable ['RHD_F5MenuDialog',_this select 0]; [] call RHD_fnc_openF5Menu;";
+    onLoad = "uiNamespace setVariable ['RHD_F5MenuDialog',_this select 0];";
     class controlsBackground
     {
         class Background:RscText
@@ -53,6 +53,7 @@ class RHD_F5MenuDialog
         };
         class Hint:RscStructuredText
         {
+            idc=8912;
             x=.19; y=.18; w=.62; h=.09;
             text="";
             size=.85;
@@ -64,11 +65,11 @@ class RHD_F5MenuDialog
         class Banking:RscButton{x=.405;y=.29;w=.19;h=.075;text="Banking / ATM";action="['bank'] call RHD_fnc_f5Action;";};
         class Shop:RscButton{x=.62;y=.29;w=.16;h=.075;text="Shop";action="['shop'] call RHD_fnc_f5Action;";};
         class Jobs:RscButton{x=.19;y=.39;w=.19;h=.075;text="Jobs";action="['jobs'] call RHD_fnc_f5Action;";};
-        class Licenses:RscButton{x=.405;y=.39;w=.19;h=.075;text="Licenses";action="['licenses'] call RHD_fnc_f5Action;";};
-        class Garage:RscButton{x=.62;y=.39;w=.16;h=.075;text="Garage";action="['garage'] call RHD_fnc_f5Action;";};
-        class Registry:RscButton{x=.19;y=.49;w=.19;h=.075;text="Vehicle Registry";action="['registry'] call RHD_fnc_f5Action;";};
-        class Register:RscButton{x=.405;y=.49;w=.19;h=.075;text="Register Current Vehicle";action="['register'] call RHD_fnc_f5Action;";};
-        class Impound:RscButton{x=.62;y=.49;w=.16;h=.075;text="Impound";action="['impound'] call RHD_fnc_f5Action;";};
+        class Licenses:RscButton{x=.405;y=.39;w=.19;h=.075;text="Licenses";action="['licenses'] call RHD_f5Action;";};
+        class Garage:RscButton{x=.62;y=.39;w=.16;h=.075;text="Garage";action="['garage'] call RHD_f5Action;";};
+        class Registry:RscButton{x=.19;y=.49;w=.19;h=.075;text="Vehicle Registry";action="['registry'] call RHD_f5Action;";};
+        class Register:RscButton{x=.405;y=.49;w=.19;h=.075;text="Register Current Vehicle";action="['register'] call RHD_f5Action;";};
+        class Impound:RscButton{x=.62;y=.49;w=.16;h=.075;text="Impound";action="['impound'] call RHD_f5Action;";};
         class Close:RscButton{x=.59;y=.78;w=.19;h=.06;text="Close";action="closeDialog 0";};
     };
 };
