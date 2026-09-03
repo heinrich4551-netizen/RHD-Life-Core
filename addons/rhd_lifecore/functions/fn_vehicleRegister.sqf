@@ -1,0 +1,21 @@
+if (!isServer) exitWith {false};
+params [["_vehicle", objNull, [objNull]]];
+private _owner = remoteExecutedOwner;
+private _player = allPlayers select {owner _x == _owner} param [0, objNull];
+if (isNull _player || {isNull _vehicle} || {!alive _vehicle}) exitWith {false};
+if (driver _vehicle != _player) exitWith {false};
+private _uid = getPlayerUID _player;
+_vehicle setVariable ["RHD_VehicleOwnerUID", _uid, true];
+private _plate = vehicleVarName _vehicle;
+if (_plate isEqualTo "") then {_plate = format ["RHD-%1", floor random 9999]; _vehicle setPlateNumber _plate;};
+private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
+private _profile = _profiles getOrDefault [_uid, createHashMap];
+if (count _profile == 0) exitWith {false};
+private _vehicles = _profile getOrDefault ["vehicles", []];
+_vehicles pushBackUnique [typeOf _vehicle, getPlateNumber _vehicle, 0];
+_profile set ["vehicles", _vehicles];
+_profiles set [_uid, _profile];
+missionNamespace setVariable ["RHD_LifeCore_ServerProfiles", _profiles];
+_player setVariable ["RHD_RP_Vehicles", _vehicles, true];
+[_player] call RHD_fnc_serverSaveProfile;
+true
