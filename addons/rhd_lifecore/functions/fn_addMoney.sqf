@@ -1,13 +1,5 @@
-params ["_amount", ["_account", "cash"]];
-
-if (!isNumber _amount) exitWith {false};
+params [["_amount", 0, [0]], ["_account", "cash", [""]]];
+if (!hasInterface) exitWith {false};
 if !(_account in ["cash", "bank"]) exitWith {false};
-
-private _variable = if (_account isEqualTo "bank") then {"RHD_RP_Bank"} else {"RHD_RP_Cash"};
-private _current = player getVariable [_variable, 0];
-private _new = _current + _amount;
-
-if (_new < 0) exitWith {false};
-player setVariable [_variable, _new, true];
-
-true
+private _action = if (_account isEqualTo "bank") then {"addbank"} else {"addcash"};
+[_action, _amount] call RHD_fnc_economyRequest
