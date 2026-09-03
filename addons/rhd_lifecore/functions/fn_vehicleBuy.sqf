@@ -14,7 +14,7 @@ private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles",
 private _profile = _profiles getOrDefault [_uid, createHashMap];
 if (count _profile == 0) exitWith {false};
 private _licenseList = _profile getOrDefault ["licenses", []];
-if !(["driving"] call RHD_fnc_licenseHas) exitWith {false};
+if !("driving" in _licenseList) exitWith {false};
 private _price = (parseNumber (_entry select 2)) max 0;
 private _cash = _profile getOrDefault ["cash", 0];
 if (_price > _cash) exitWith {false};
