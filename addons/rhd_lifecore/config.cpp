@@ -67,7 +67,7 @@ class CfgVehicles
             {
                 property = "RHD_EnableEconomy";
                 displayName = "Enable Basic Economy";
-                tooltip = "Enables server-authoritative cash/bank variables and pay functions.";
+                tooltip = "Enables basic cash/bank variables and pay functions.";
                 control = "Checkbox";
                 expression = "_this setVariable ['RHD_EnableEconomy',_value,true]";
                 defaultValue = "true";
@@ -145,17 +145,6 @@ class Cfg3DEN
                     };
                 };
             };
-        };
-    };
-};
-
-class Cfg3DEN
-{
-    class EventHandlers
-    {
-        class RHD_LifeCore
-        {
-            init = "";
         };
     };
 };
