@@ -28,6 +28,8 @@ class CfgFunctions
             class dispatchList {};
             class warrantAdd {};
             class warrantHas {};
+            class citationIssue {};
+            class dutySet {};
             class phoneSend {};
             class phoneGet {};
             class emergencyCall {};
@@ -52,8 +54,11 @@ class CfgRemoteExec
         class RHD_fnc_dispatchCreate {allowedTargets = 2;};
         class RHD_fnc_dispatchList {allowedTargets = 2;};
         class RHD_fnc_warrantAdd {allowedTargets = 2;};
+        class RHD_fnc_citationIssue {allowedTargets = 2;};
+        class RHD_fnc_dutySet {allowedTargets = 2;};
         class RHD_fnc_phoneSend {allowedTargets = 2;};
         class RHD_fnc_emergencyCall {allowedTargets = 2;};
         class RHD_fnc_paycheck {allowedTargets = 2;};
+        class RHD_fnc_civilianManager {allowedTargets = 2;};
     };
 };
