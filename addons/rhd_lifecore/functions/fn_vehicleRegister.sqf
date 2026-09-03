@@ -9,6 +9,11 @@ if (driver _vehicle isNotEqualTo _player) exitWith {false};
 private _uid = getPlayerUID _player;
 if (_uid isEqualTo "") exitWith {false};
 
+private _registeredOwner = _vehicle getVariable ["RHD_VehicleOwnerUID", ""];
+if !(_registeredOwner isEqualTo "") then {
+    if !(_registeredOwner isEqualTo _uid) exitWith {false};
+};
+
 private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
 private _profile = _profiles getOrDefault [_uid, createHashMap];
 if (count _profile == 0) exitWith {false};
@@ -40,13 +45,19 @@ if (_plate isEqualTo "") then {
     _vehicle setPlateNumber _plate;
 };
 
-private _duplicate = _vehicles findIf {(_x param [1, ""]) isEqualTo _plate};
-if (_duplicate >= 0) exitWith {false};
+private _duplicateGlobal = false;
+{
+    private _owned = _x getOrDefault ["vehicles", []];
+    private _found = _owned findIf {(_x param [1, ""]) isEqualTo _plate};
+    if (_found >= 0) exitWith {
+        _duplicateGlobal = true;
+    };
+} forEach (values _profiles);
+if (_duplicateGlobal) exitWith {false};
 
 _vehicle setVariable ["RHD_VehicleOwnerUID", _uid, true];
 
-private _price = 0;
-private _record = [typeOf _vehicle, _plate, _price, "out", fuel _vehicle, damage _vehicle];
+private _record = [typeOf _vehicle, _plate, 0, "out", fuel _vehicle, damage _vehicle];
 _vehicles pushBack _record;
 
 _profile set ["vehicles", _vehicles];
