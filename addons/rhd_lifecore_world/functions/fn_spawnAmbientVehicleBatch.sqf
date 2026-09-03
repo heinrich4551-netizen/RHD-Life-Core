@@ -10,8 +10,9 @@ private _vehicles = missionNamespace getVariable ["RHD_LifeCore_AmbientVehicles"
 private _created = 0;
 for "_i" from 1 to _count do {
     private _loc = selectRandom _locations;
-    private _road = nearestRoad (_loc select 2);
-    private _pos = if (isNull _road) then {[_loc select 2,20,120] call RHD_fnc_safeSpawnPos} else {getPosATL _road};
+    private _locPos = _loc select 2;
+    private _road = nearestRoad _locPos;
+    private _pos = if (isNull _road) then {[_locPos,20,120] call RHD_fnc_safeSpawnPos} else {getPosATL _road};
     if (_pos isNotEqualTo []) then {
         private _veh = createVehicle [selectRandom _classes,_pos,[],0,"NONE"];
         if (!isNull _veh) then {
