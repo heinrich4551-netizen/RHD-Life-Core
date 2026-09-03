@@ -1,20 +1,15 @@
 if (!isServer) exitWith {false};
-params [
-    ["_action", "", [""]],
-    ["_amount", 0, [0]],
-    ["_targetUID", "", [""]]
-];
+params [["_action", "", [""]], ["_amount", 0, [0]], ["_targetUID", "", [""]]];
 
 private _owner = remoteExecutedOwner;
 private _player = if (_owner > 0) then {allPlayers select {owner _x == _owner} param [0, objNull]} else {objNull};
 if (isNull _player || {!isPlayer _player}) exitWith {false};
-
 private _uid = getPlayerUID _player;
 if (_uid isEqualTo "") exitWith {false};
+
 private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
 private _profile = _profiles getOrDefault [_uid, createHashMap];
 if (count _profile == 0) exitWith {false};
-
 _amount = round _amount;
 if (_amount < 0) exitWith {false};
 private _changed = false;
@@ -24,12 +19,13 @@ switch (toLower _action) do {
         _profile set ["cash", ((_profile getOrDefault ["cash", 0]) + _amount) max 0];
         _changed = true;
     };
+    case "addbank": {
+        _profile set ["bank", ((_profile getOrDefault ["bank", 0]) + _amount) max 0];
+        _changed = true;
+    };
     case "removecash": {
         private _cash = _profile getOrDefault ["cash", 0];
-        if (_amount <= _cash) then {
-            _profile set ["cash", _cash - _amount];
-            _changed = true;
-        };
+        if (_amount <= _cash) then {_profile set ["cash", _cash - _amount]; _changed = true;};
     };
     case "deposit": {
         private _cash = _profile getOrDefault ["cash", 0];
@@ -55,6 +51,11 @@ switch (toLower _action) do {
             _profile set ["bank", _bank - _amount];
             _target set ["bank", (_target getOrDefault ["bank", 0]) + _amount];
             _profiles set [_targetUID, _target];
+            private _targetPlayer = allPlayers select {getPlayerUID _x == _targetUID} param [0, objNull];
+            if (!isNull _targetPlayer) then {
+                _targetPlayer setVariable ["RHD_RP_Bank", _target get "bank", true];
+                [_targetPlayer] call RHD_fnc_serverSaveProfile;
+            };
             _changed = true;
         };
     };
