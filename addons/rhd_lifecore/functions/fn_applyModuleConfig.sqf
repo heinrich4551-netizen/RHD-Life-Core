@@ -20,6 +20,7 @@ _config set ["shopsEnabled", _logic getVariable ["RHD_EnableShops", true]];
 _config set ["vehiclesEnabled", _logic getVariable ["RHD_EnableVehicles", true]];
 _config set ["jobsEnabled", _logic getVariable ["RHD_EnableJobs", true]];
 _config set ["rolesEnabled", _logic getVariable ["RHD_EnableRoles", true]];
+_config set ["f5MenuEnabled", _logic getVariable ["RHD_F5MenuEnabled", true]];
 _config set ["civilianPopulationEnabled", _logic getVariable ["RHD_CivilianPopulationEnabled", true]];
 _config set ["civilianBasePopulation", (_logic getVariable ["RHD_CivilianBasePopulation", 115]) max 1];
 _config set ["civilianMinimumPopulation", (_logic getVariable ["RHD_CivilianMinimumPopulation", 60]) max 1];
