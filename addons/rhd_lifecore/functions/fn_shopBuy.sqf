@@ -1,0 +1,32 @@
+if (!isServer) exitWith {false};
+params [["_itemId", "", [""]], ["_quantity", 1, [0]]];
+private _owner = remoteExecutedOwner;
+private _player = allPlayers select {owner _x == _owner} param [0, objNull];
+if (isNull _player) exitWith {false};
+_quantity = floor _quantity;
+if (_quantity < 1 || {_quantity > 100}) exitWith {false};
+private _cfg = missionNamespace getVariable ["RHD_LifeCore_Config", createHashMap];
+if !(_cfg getOrDefault ["shopsEnabled", true]) exitWith {false};
+private _items = [_cfg getOrDefault ["shopCatalog", ""]] call RHD_fnc_parseList;
+private _entry = _items select {toLower (_x param [0, ""]) isEqualTo toLower _itemId} param [0, []];
+if (count _entry < 4) exitWith {false};
+private _buyPrice = (parseNumber (_entry select 2)) max 0;
+private _total = _buyPrice * _quantity;
+private _uid = getPlayerUID _player;
+private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
+private _profile = _profiles getOrDefault [_uid, createHashMap];
+if (count _profile == 0) exitWith {false};
+private _cash = _profile getOrDefault ["cash", 0];
+if (_total > _cash) exitWith {false};
+
+private _inventory = _profile getOrDefault ["inventory", []];
+private _idx = _inventory findIf {(_x select 0) isEqualTo _itemId};
+if (_idx < 0) then {_inventory pushBack [_itemId, _quantity];} else {_inventory set [_idx, [_itemId, (_inventory select _idx select 1) + _quantity]];};
+_profile set ["cash", _cash - _total];
+_profile set ["inventory", _inventory];
+_profiles set [_uid, _profile];
+missionNamespace setVariable ["RHD_LifeCore_ServerProfiles", _profiles];
+_player setVariable ["RHD_RP_Cash", _profile get "cash", true];
+_player setVariable ["RHD_RP_Inventory", _inventory, true];
+[_player] call RHD_fnc_serverSaveProfile;
+true
