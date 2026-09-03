@@ -24,6 +24,25 @@ if (isNil {player getVariable "RHD_RP_MenuAction"}) then {
     player setVariable ["RHD_RP_MenuAction", _actionId];
 };
 
+if (isNil {player getVariable "RHD_RP_RegisterVehicleAction"}) then {
+    private _registerAction = player addAction [
+        "<t color='#C9A227'>RHD Vehicle</t> - Register Current Vehicle",
+        {
+            private _vehicle = vehicle player;
+            if (_vehicle isEqualTo player || {driver _vehicle isNotEqualTo player}) exitWith {
+                hint "RHD Vehicle Registry: You must be the driver of the vehicle you want to register.";
+            };
+            if !(alive _vehicle) exitWith {
+                hint "RHD Vehicle Registry: That vehicle is no longer operational.";
+            };
+            [_vehicle] remoteExecCall ["RHD_fnc_vehicleRegister", 2];
+            hint "RHD Vehicle Registry: Registration request sent to the server.";
+        },
+        nil, 1.5, true, true, "", "vehicle player != player && {driver (vehicle player) isEqualTo player}", 5, false, ""
+    ];
+    player setVariable ["RHD_RP_RegisterVehicleAction", _registerAction];
+};
+
 [player] remoteExecCall ["RHD_fnc_serverLoadProfile", 2];
 
 [] spawn {
