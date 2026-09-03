@@ -1,6 +1,6 @@
 # RHD - LifeCore: Third-Party References
 
-RHD LifeCore is an original framework. Public Arma 3 repositories were reviewed for architecture and interoperability patterns rather than copied wholesale.
+RHD LifeCore is an original framework. Public Arma 3 repositories were reviewed for architecture and interoperability patterns. Where a useful implementation pattern was adapted, it was rewritten to fit RHD's function namespaces, server-authoritative design, 3DEN configuration, and optional Antistasi compatibility.
 
 ## A3RPGFramework
 Repository: https://github.com/TMschar/A3RPGFramework
@@ -13,6 +13,13 @@ Repository: https://github.com/Antistasi-Ultimate-Community/A3-Antistasi-Ultimat
 License: MIT for the main Antistasi Ultimate codebase, subject to the repository's stated exceptions.
 
 RHD uses Antistasi Ultimate as a compatibility target. RHD does not declare Antistasi Ultimate as a hard dependency and does not redistribute its APL-ND exception assets.
+
+## Scarso327 AltisLife-Framework
+Repository: https://github.com/Scarso327/AltisLife-Framework
+License: MIT License
+Copyright: (c) 2023 Jack Farhall
+
+RHD reviewed the vehicle metadata, vehicle store, and registration patterns from this framework. The useful patterns were rewritten rather than imported wholesale so they operate with RHD LifeCore's own profile schema, garage state model, server validation, and PBO/function namespaces. No ULP framework dependency is introduced.
 
 ## Redistribution policy
 
