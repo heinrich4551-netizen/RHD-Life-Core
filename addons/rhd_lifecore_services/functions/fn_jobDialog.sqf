@@ -1,0 +1,4 @@
+params [['_index',-1,[0]]];
+if (!hasInterface) exitWith {false};
+if (_index >= 0) then {private _d=uiNamespace getVariable ['RHD_JobDialog',displayNull]; private _id=_d displayCtrl 8871 lbData _index; [_id] remoteExecCall ['RHD_fnc_jobSet',2]; exitWith {true};};
+createDialog 'RHD_JobDialog'; private _d=uiNamespace getVariable ['RHD_JobDialog',displayNull]; if (isNull _d) exitWith {false}; private _list=_d displayCtrl 8871; lbClear _list; private _cfg=missionNamespace getVariable ['RHD_LifeCore_Config',createHashMap]; { _x params ['_id','_display','_pay']; private _i=_list lbAdd format ['%1  |  $%2 pay',_display,_pay]; _list lbSetData [_i,_id]; } forEach ([_cfg getOrDefault ['jobs','']] call RHD_fnc_parseList); true

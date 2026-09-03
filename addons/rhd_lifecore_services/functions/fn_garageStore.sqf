@@ -1,0 +1,1 @@
+if (!hasInterface) exitWith {false}; private _veh=vehicle player; if (_veh == player) exitWith {hint 'Enter the vehicle you want to store.';false}; private _plate=getPlateNumber _veh; [_plate] remoteExecCall ['RHD_fnc_garageStoreServer',2]; true

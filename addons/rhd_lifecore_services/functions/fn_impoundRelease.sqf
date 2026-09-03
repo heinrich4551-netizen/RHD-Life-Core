@@ -1,0 +1,1 @@
+params [['_index',-1,[0]]]; private _d=uiNamespace getVariable ['RHD_ImpoundDialog',displayNull]; private _plate=_d displayCtrl 8901 lbData _index; [_plate] remoteExecCall ['RHD_fnc_impoundReleaseServer',2];

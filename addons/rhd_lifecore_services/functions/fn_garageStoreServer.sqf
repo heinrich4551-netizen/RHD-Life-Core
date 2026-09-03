@@ -1,0 +1,1 @@
+if (!isServer) exitWith {false}; params [['_plate','',['']]]; private _owner=remoteExecutedOwner; private _player=allPlayers select {owner _x == _owner} param [0,objNull]; if (isNull _player) exitWith {false}; private _v=vehicle _player; if (_v == _player || {getPlateNumber _v != _plate}) exitWith {false}; deleteVehicle _v; true
