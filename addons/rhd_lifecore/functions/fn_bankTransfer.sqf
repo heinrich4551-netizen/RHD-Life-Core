@@ -1,3 +1,21 @@
 if (!isServer) exitWith {false};
 params [["_targetUID", "", [""]], ["_amount", 0, [0]]];
-[_targetUID, _amount] call RHD_fnc_serverEconomy
+private _owner = remoteExecutedOwner;
+private _player = allPlayers select {owner _x == _owner} param [0, objNull];
+if (isNull _player || {_targetUID isEqualTo ""} || {_amount <= 0}) exitWith {false};
+private _uid = getPlayerUID _player;
+private _profiles = missionNamespace getVariable ["RHD_LifeCore_ServerProfiles", createHashMap];
+private _src = _profiles getOrDefault [_uid, createHashMap];
+private _dst = _profiles getOrDefault [_targetUID, createHashMap];
+if (count _src == 0 || {count _dst == 0}) exitWith {false};
+private _bank = _src getOrDefault ["bank", 0];
+private _amountRound = round _amount;
+if (_amountRound < 1 || {_amountRound > _bank}) exitWith {false};
+_src set ["bank", _bank - _amountRound];
+_dst set ["bank", (_dst getOrDefault ["bank", 0]) + _amountRound];
+_profiles set [_uid, _src];
+_profiles set [_targetUID, _dst];
+missionNamespace setVariable ["RHD_LifeCore_ServerProfiles", _profiles];
+_player setVariable ["RHD_RP_Bank", _src get "bank", true];
+[_player] call RHD_fnc_serverSaveProfile;
+true
