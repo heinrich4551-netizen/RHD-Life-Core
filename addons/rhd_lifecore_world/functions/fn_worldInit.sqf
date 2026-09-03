@@ -4,6 +4,11 @@ waitUntil {time > 0 && {!isNil "RHD_LifeCore_WorldConfig"}};
 private _cfg = missionNamespace getVariable ["RHD_LifeCore_WorldConfig",createHashMap];
 if !(_cfg getOrDefault ["enabled",true]) exitWith {false};
 
+if (_cfg getOrDefault ["dynamicSimulation",true]) then {
+    enableDynamicSimulationSystem true;
+    setDynamicSimulationDistance ((_cfg getOrDefault ["dynamicSimulationDistance",1500]) max 100);
+};
+
 private _started = missionNamespace getVariable ["RHD_LifeCore_WorldStarted",false];
 [] call RHD_fnc_generateLocations;
 if (_cfg getOrDefault ["generateSpawnLocations",true]) then {[] call RHD_fnc_generateSpawnLocations;};
