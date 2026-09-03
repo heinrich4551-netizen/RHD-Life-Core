@@ -1,20 +1,19 @@
 params ["_logic", "_units", "_activated"];
 
-if (!_activated) exitWith {};
+if (!_activated) exitWith {false};
 
-private _config = createHashMapFromArray [
-    ["identity", _logic getVariable ["RHD_EnableIdentity", true]],
-    ["economy", _logic getVariable ["RHD_EnableEconomy", true]],
-    ["startingCash", _logic getVariable ["RHD_StartingCash", 500]],
-    ["startingBank", _logic getVariable ["RHD_StartingBank", 1000]],
-    ["debug", _logic getVariable ["RHD_Debug", false]]
-];
+private _config = [_logic] call RHD_fnc_applyModuleConfig;
 
 missionNamespace setVariable ["RHD_LifeCore_Enabled", true, true];
+missionNamespace setVariable ["RHD_LifeCore_Module", _logic, true];
 missionNamespace setVariable ["RHD_LifeCore_Config", _config, true];
 
-if (_config get "debug") then {
-    diag_log format ["[RHD-LifeCore] RP module initialized. Config: %1", _config];
+if (isServer) then {
+    [] call RHD_fnc_serverInit;
+};
+
+if (missionNamespace getVariable ["RHD_LifeCore_Config", createHashMap] getOrDefault ["debug", false]) then {
+    diag_log format ["[RHD-LifeCore] 3DEN RP module initialized: %1", _config];
 };
 
 true
