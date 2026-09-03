@@ -11,12 +11,12 @@ RHD LifeCore is designed so mission makers can add the framework without editing
 
 1. Open the repository: https://github.com/heinrich4551-netizen/RHD-Life-Core
 2. Download the latest **RHD-LifeCore release ZIP** from **Releases**.
-3. Extract the ZIP. It contains the ready-to-use `@RHD-LifeCore` mod folder.
-4. Put `@RHD-LifeCore` in your Arma 3 directory, normally beside the `Arma 3` executable or in your preferred mod directory.
+3. Create a folder named `@RHD-LifeCore` in your Arma 3 directory (or another local mod directory).
+4. Extract the contents of the release ZIP **into** `@RHD-LifeCore`. The folder should directly contain `mod.cpp` and `addons`, plus `keys` when present.
 5. Open the **Arma 3 Launcher** → **Mods** → **Local mod** → select `@RHD-LifeCore`.
 6. Enable the mod.
 
-The repository also publishes a HEMTT build artifact through GitHub Actions on every build. The release package is the preferred end-user download because it is already packaged for the Arma 3 Launcher.
+The repository also publishes a HEMTT build artifact through GitHub Actions on every build. The artifact is a ready-to-package release archive; place its contents inside `@RHD-LifeCore` as described above.
 
 ## 3DEN setup
 
@@ -74,9 +74,11 @@ Compatibility adapters can be added later for mission-specific systems without m
 
 The architecture is informed by established public Arma 3 projects. In particular, `TMschar/A3RPGFramework` is a public SQF RPG framework under the MIT License, making it a useful reference for reusable RPG architecture. `eisengrind/liveinlife` is another public Arma 3 RP framework, but it is GPL-3.0; its code is therefore not copied into this project. We will prefer original implementations or source code whose license explicitly permits reuse.
 
+A separate public RP mission, `Lyed/Framework_Tanoa_Life`, demonstrates features such as a phone, money laundering, and licenses; these are roadmap targets rather than copied assets/code.
+
 ## Build system
 
-The project uses **HEMTT**. HEMTT is used to create the release PBO and archive so end users receive a normal `@RHD-LifeCore` Arma 3 mod package.
+The project uses **HEMTT**. HEMTT is used to create the release PBO and archive so end users receive a normal Arma 3 mod package.
 
 - Local development: `hemtt build`
 - Release package: `hemtt release`
