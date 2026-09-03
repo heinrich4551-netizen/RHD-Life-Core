@@ -24,8 +24,12 @@ if (isNil {player getVariable "RHD_RP_MenuAction"}) then {
     player setVariable ["RHD_RP_MenuAction", _actionId];
 };
 
-// Ask the server to load the authoritative profile. The server validates the caller owner.
 [player] remoteExecCall ["RHD_fnc_serverLoadProfile", 2];
+
+[] spawn {
+    uiSleep 2;
+    [] call RHD_fnc_setupInteractions;
+};
 
 if (isNil {player getVariable "RHD_RP_RespawnEH"}) then {
     private _eh = player addEventHandler ["Respawn", {
