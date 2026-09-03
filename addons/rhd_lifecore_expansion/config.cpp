@@ -33,6 +33,7 @@ class CfgFunctions
             class emergencyCall {};
             class jobProgress {};
             class paycheck {};
+            class systemInit { postInit = 1; };
             class civilianManager { postInit = 1; };
         };
     };
